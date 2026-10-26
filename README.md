@@ -1,5 +1,7 @@
 # EPFL CS-433 — Project 1 (Fall 2026)
 
+**Team:** Ayhan Suleymanzade, Jasna Ilieva, Hayden Richard Stec.
+
 [Open in Colab](https://colab.research.google.com/github/MisakiTaro0414/epfl-ml-project1-2026/blob/main/run.ipynb)
 
 NumPy implementations of the six required algorithms, an executed classification
@@ -168,8 +170,8 @@ team Colab link required Google authentication and was not available to inspect;
 its code has not been merged or overwritten. The companion notebook in this
 repository is a separate reproducible entry point. Execution recorded here took
 place on the local CPU environment, not an authenticated Google Colab runtime.
-Team members should review the implementation and report and add their author
-names before submitting. No AIcrowd prediction upload or final course submission
+Team members should review the implementation and report before submitting.
+No AIcrowd prediction upload or final course submission
 has been made.
 
 Primary sources:
