@@ -1,0 +1,8 @@
+{
+  "name": "engineered_logistic_1e-05",
+  "mode": "engineered",
+  "kind": "logistic",
+  "lambda": 1e-05,
+  "features": 1136,
+  "threshold": 0.21064792573451996
+}

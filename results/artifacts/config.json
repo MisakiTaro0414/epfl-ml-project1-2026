@@ -1,0 +1,17 @@
+{
+  "name": "engineered_logistic_1e-05",
+  "mode": "engineered",
+  "kind": "logistic",
+  "lambda": 1e-05,
+  "features": 1156,
+  "threshold": 0.21064792573451996,
+  "seed": 433,
+  "training_rows": 328135,
+  "numpy_version": "2.5.4",
+  "label_mapping": {
+    "negative": -1,
+    "positive": 1
+  },
+  "weights_sha256": "8cc775687114e6dc8f7d11eabeac4c7c217eee026a7f6c3420507f435c161623",
+  "preprocessor_sha256": "19ca9f64f19d5045b424623860b78b4346b5e4896a5af719429848f738f477b1"
+}

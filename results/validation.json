@@ -1,0 +1,12 @@
+{
+  "submission_rows": 109379,
+  "positive_predictions": 14088,
+  "submission_sha256": "aa418240aa687a9b3b891998a3d077b3d0918825a0a8f2b223fe378b15e1cdf2",
+  "repeated_inference_byte_identical": true,
+  "execution_environment": "local CPU; not authenticated Colab",
+  "online_submission": false,
+  "custom_tests_passed": 28,
+  "official_applicable_checks_passed": 27,
+  "notebook_execution": "local CPU",
+  "notebook_errors": 0
+}

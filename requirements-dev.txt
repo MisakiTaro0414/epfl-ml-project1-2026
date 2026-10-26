@@ -1,0 +1,9 @@
+-r requirements.txt
+matplotlib>=3.7
+pytest>=7
+black
+GitPython
+nbformat
+nbclient
+ipykernel
+pypdf

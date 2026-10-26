@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/
+course/
+*.aux
+*.log
+*.out
+*.synctex.gz
+/submission.csv
+/submission_reproduced.csv
+project1_submission.zip
+dist/
+results/progress.json
+results/split_ids.npz
+results/holdout_predictions.npz
+results/*_development_preprocessor.json
