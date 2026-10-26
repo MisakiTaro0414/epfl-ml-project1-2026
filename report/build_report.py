@@ -2,7 +2,7 @@
 
 Run from the project root with ``python report/build_report.py``. Results must
 exist first: this script never substitutes made-up metrics for unfinished runs.
-Only the Python standard library is used; PDF compilation requires pdflatex.
+Figures use Matplotlib for visualization; PDF compilation requires pdflatex.
 """
 
 import argparse
@@ -11,6 +11,8 @@ import math
 from pathlib import Path
 import shutil
 import subprocess
+
+from build_figures import generate_figures
 
 HERE = Path(__file__).resolve().parent
 
@@ -65,6 +67,18 @@ def build(metrics_path, output_dir, compile_pdf=True):
         )
     data = result["data"]
     split = result["split_sizes"]
+    summary_rows = [
+        rf"Always negative & -- & {majority['f1']:.4f} & {majority['accuracy']:.4f} \\",
+    ]
+    for row in experiments:
+        if row["kind"] in {"least_squares", "ridge"} or row["name"] == selected["name"]:
+            name = label[row["kind"]]
+            if row["name"] == selected["name"]:
+                name = r"\textbf{Selected logistic}"
+            summary_rows.append(
+                rf"{name} & {row['tuning']['f1']:.4f}"
+                rf" & {row['holdout']['f1']:.4f} & {row['holdout']['accuracy']:.4f} \\",
+            )
     tokens = {
         "NROWS": f"{data['rows']:,}",
         "NPOS": f"{data['positives']:,}",
@@ -104,6 +118,15 @@ def build(metrics_path, output_dir, compile_pdf=True):
         "ITERATIONS": str(chosen["optimizer"].get("iterations", "not iterative")),
         "FINALFEATURES": str(result["final_features"]),
         "TABLE": "\n".join(rows),
+        "SUMMARYTABLE": "\n".join(summary_rows),
+        "MATCHEDF1": f"{same_lambda['holdout']['f1']:.4f}",
+        "MAJACCPCT": f"{100 * majority['accuracy']:.2f}",
+        "DEFAULTRECPCT": f"{100 * default['recall']:.1f}",
+        "RECPCT": f"{100 * holdout['recall']:.1f}",
+        "DEFAULTPRECPCT": f"{100 * default['precision']:.1f}",
+        "PRECPCT": f"{100 * holdout['precision']:.1f}",
+        "DEFAULTACCPCT": f"{100 * default['accuracy']:.2f}",
+        "ACCPCT": f"{100 * holdout['accuracy']:.2f}",
     }
     document = (HERE / "report_template.tex").read_text()
     for key, value in tokens.items():
@@ -112,6 +135,7 @@ def build(metrics_path, output_dir, compile_pdf=True):
         raise ValueError("Unresolved report substitution")
     output_dir = Path(output_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
+    generate_figures(metrics_path, output_dir / "figures")
     tex = output_dir / "report.tex"
     tex.write_text(document)
     if compile_pdf:

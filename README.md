@@ -135,7 +135,9 @@ checks in a clean submission directory. The remaining official check only tests
 the remote GitHub URL format; it is excluded when testing a local path. The
 companion notebook was executed locally without cell errors.
 
-The report builder needs a working LaTeX installation. Development-only notebook,
+The report builder needs Matplotlib and a working LaTeX installation. It regenerates
+the evaluation diagram and comparison figures from the recorded experiment metrics.
+Development-only notebook,
 formatting, plotting and course-test tools are listed in `requirements-dev.txt`;
 they are not dependencies of prediction or training.
 
