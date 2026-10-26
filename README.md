@@ -11,9 +11,12 @@ disease in the supplied BRFSS survey, not prospectively observed future disease.
 
 ## Run the saved model
 
-Python 3.10+ and NumPy are sufficient for data loading, training, and prediction.
+Python 3.9+ and NumPy 1.23.1+ are sufficient for data loading, training, and prediction.
 The recorded run used Python 3.12 and NumPy 2.5.4 on CPU. No pandas, scikit-learn,
 SciPy, or deep-learning libraries are used by the project.
+
+Compatibility is verified with the course grader's Python 3.9 and NumPy 1.23.1;
+inference produces the same prediction CSV bytes as the recorded training environment.
 
 ```bash
 python -m pip install -r requirements.txt
@@ -91,8 +94,9 @@ all functions return final weights and the unregularized loss. The required
 regularized functions penalize every supplied weight, including the intercept.
 Normal equations use a pseudoinverse fallback for singular systems, never `lstsq`.
 
-The experiment compares least squares, ridge (`lambda=0.001`), and logistic models
-with each of `lambda=0.00001,0.0001,0.001` under both feature representations.
+The experiment compares least squares and ridge (`lambda=0.001`) on numeric
+features, plus logistic models with each of `lambda=0.00001,0.0001,0.001` under
+both feature representations.
 The experiment's logistic optimizer is a separate NumPy implementation of L-BFGS,
 with ten history pairs and Armijo backtracking. Its objective is mean binary
 cross-entropy plus `lambda * ||w[1:]||²`, leaving the intercept unpenalized.
@@ -125,17 +129,21 @@ This model is a course classification exercise, not a clinical decision system.
 
 ## Validation and report
 
+See [the guidelines audit](GUIDELINES_AUDIT.md) for requirement-by-requirement
+evidence and the outstanding AIcrowd and course-portal submission steps.
+
 ```bash
 python -m unittest discover -s tests -v
 python run.py --output submission_reproduced.csv
-cmp submission.csv submission_reproduced.csv
+cmp predictions/submission.csv submission_reproduced.csv
 python report/build_report.py
 ```
 
 Validation passed 28 independent tests and all 27 applicable official course
-checks in a clean submission directory. The remaining official check only tests
-the remote GitHub URL format; it is excluded when testing a local path. The
-companion notebook was executed locally without cell errors.
+checks in a clean submission directory using Python 3.9.25, NumPy 1.23.1,
+pytest 7.1.2, Black 22.6.0, and GitPython 3.1.18. The remaining official check
+only tests the remote GitHub URL format; it is excluded when testing a local path.
+The companion notebook was executed locally without cell errors.
 
 The report builder needs Matplotlib and a working LaTeX installation. It regenerates
 the evaluation diagram and comparison figures from the recorded experiment metrics.

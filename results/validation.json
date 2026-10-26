@@ -8,5 +8,22 @@
   "custom_tests_passed": 28,
   "official_applicable_checks_passed": 27,
   "notebook_execution": "local CPU",
-  "notebook_errors": 0
+  "notebook_errors": 0,
+  "guidelines_audit": {
+    "date": "2026-10-26",
+    "course_commit": "36e71e36e4d1f7d18cbc63d38409815a24bdc0c7",
+    "python": "3.9.25",
+    "numpy": "1.23.1",
+    "pytest": "7.1.2",
+    "black": "22.6.0",
+    "gitpython": "3.1.18",
+    "custom_tests_passed": 28,
+    "official_local_checks_passed": 27,
+    "official_local_excluded": "GitHub URL format (local path used)",
+    "grader_environment_predictions_byte_identical": true,
+    "report_pages_including_references": 2,
+    "allowed_imports_check": true,
+    "competition_submission_verified": false,
+    "course_submission_verified": false
+  }
 }
